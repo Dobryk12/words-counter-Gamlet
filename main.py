@@ -23,7 +23,7 @@ def remove_punctuation_and_digits(text: str) -> str:
 def parse_book_words(url: str) -> list:
     page = requests.get(url)
     soup = bs4.BeautifulSoup(page.text, "html.parser")
-    text = remove_punctuation_and_digits(soup.find(class_="prose", id="content").text.strip())
+    text = remove_punctuation_and_digits(soup.find(class_="prose", id="content").text.strip()).lower()
     return text.split()
 
 
