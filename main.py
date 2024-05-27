@@ -18,7 +18,7 @@ BASE_URL = "https://www.ukrlib.com.ua/world/printit.php?tid=2&page="
 URLS = [BASE_URL + str(i) for i in range(1, 16)]
 
 
-async def fetch(url):
+async def fetch(url: str) -> str:
     async with aiohttp.ClientSession() as session:
         async with session.get(url) as response:
             return await response.text()
@@ -42,7 +42,7 @@ def save_word_counts_to_csv(courses: list, filename: str) -> None:
         writer.writerows((course.word, course.count) for course in courses)
 
 
-async def main():
+async def main() -> None:
     tasks = [parse_book_words(url) for url in URLS]
     all_words = await asyncio.gather(*tasks)
 
